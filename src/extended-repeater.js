@@ -1,20 +1,36 @@
 const CustomError = require("../extensions/custom-error");
 
-module.exports = function repeater(/*str, options*/) {
-  let n = [];
-  let s = options.separator, add = options.addition, aRt = options.additionRepeatTimes > 1 ? options.additionRepeatTimes : 1, addS = options.additionSeparator;
-  let mCount = options.repeatTimes >= 1 ? options.repeatTimes : 1;
-  for (let i = 0; i < mCount; i++) {
-    if (add) {
-      let arr = [];
+module.exports = function repeater(str, options) {
+  let repeatTimes = options.repeatTimes || 1;
+  let separator = options.separator || '+';
+  let addition = options.addition;
+  let additionRepeatTimes = options.additionRepeatTimes || 1;
+  let additionSeparator = options.additionSeparator || '|';
 
-      for (let i = 0; i < aRt; i++) {
+  let result = '';
 
-        arr.push(str)
-
+  if (repeatTimes > 1 || addition) {
+    let inSep = repeatTimes - 1;
+    for (let i = 0; i < repeatTimes; i++) {
+      result +=  String(str);
+      if (addition || typeof addition === "boolean" || addition === null) {
+          let onSep = additionRepeatTimes - 1;
+          for (let j = 0; j < additionRepeatTimes; j++) {
+            result +=String(addition);
+            if (onSep > 0) {
+              result += additionSeparator;
+              onSep--;
+            }
+          }
+      }
+      if (inSep > 0) {
+        result += separator;
+        inSep--;
       }
     }
-
+    return result;
   }
-  return s, add, aRt, addS;
-};
+
+  return String(str);
+
+  };
