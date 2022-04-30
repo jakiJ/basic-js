@@ -5,7 +5,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
  const chainMaker = {
-  chain : [],
+  chain: [],
   getLength() {
     return this.chain.length;
   },
@@ -14,9 +14,9 @@ const { NotImplementedError } = require('../extensions/index.js');
     return this;
   },
   removeLink(position) {
-    if(typeof(position)!= "number" ||  !Number.isInteger(position) || position < 1 || position > this.getLength()) {
+    if(typeof(position) != 'number' || !Number.isInteger(position) || position < 1 || position > this.getLength()) {
       this.chain = [];
-      throw new Error("You can't remove incorrect link!");
+      throw new Error('You can\'t remove incorrect link!');
     }
     this.chain.splice(position - 1, 1);
     return this;
@@ -26,7 +26,7 @@ const { NotImplementedError } = require('../extensions/index.js');
     return this;
   },
   finishChain() {
-    let result = this.chain.join("~~");
+    let result = this.chain.join('~~');
     this.chain = [];
     return result;
   }

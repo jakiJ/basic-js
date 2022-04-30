@@ -21,7 +21,7 @@ function transform(arr) {
     // --discard-prev исключает предшествующий элемент массива
     // --double-next дублирует следующий элемент
     // --double-prev дублирует предшествующий элемент
-    let transformArr = arr.slice(0, arr.length);
+    let transformArr = [...arr];
 
     for (let i = 0; i < arr.length; i++) {
       if (arr[i] === '--discard-next') {
